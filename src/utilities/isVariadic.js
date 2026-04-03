@@ -85,6 +85,10 @@ const isVariadic = (key, frequency, n = Infinity, variadicMaxFrequency = VARIADI
   )
 )
 
+/**
+ * @ignore
+ * Default export with freezing.
+ */
 module.exports = Object.freeze(Object.defineProperty(isVariadic, "isVariadic", {
   value: isVariadic
 }));

@@ -3,6 +3,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const serialize = require("../src/serialize");
+const estimateTokens = require("../benchmark/utilities/estimateTokens");
 
 /**
  * Recursively searches for the first .json file in a directory.
@@ -63,17 +64,24 @@ async function run(input) {
     const jsonContent = await fs.readFile(jsonFile, "utf8");
     const jsonData = JSON.parse(jsonContent);
 
-    console.log("=== Input ===");
-    console.log(JSON.stringify(jsonData, null, 2));
+    const jsonString = JSON.stringify(jsonData, null, 2);
+    console.log(`=== Input (~${estimateTokens(jsonString)} tokens) ===`);
+    console.log(jsonString);
 
-    console.log(`\n=== MOON Output ===`);
-    console.log(serialize(jsonData, { addHints: true, compression: "high" }));
+    const moon = serialize(jsonData, {
+      addDefinitions: true,
+      addSchemaExamples: true,
+      addHints: true,
+      compression: "high"
+    });
+    console.log(`\n=== MOON Output (~${estimateTokens(moon)} tokens) ===`);
+    console.log(moon);
 
     // 4. Check for companion .toon file (same name, .toon extension)
     const toonFile = jsonFile.replace(/\.json$/i, ".toon");
     try {
       const toonContent = await fs.readFile(toonFile, "utf8");
-      console.log(`\n=== TOON Output ===`);
+      console.log(`\n=== TOON Output (~${estimateTokens(toonContent)} tokens) ===`);
       console.log(toonContent);
     } catch (e) {
       // Silently ignore if no .toon file exists
