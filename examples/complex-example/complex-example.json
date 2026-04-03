@@ -1,0 +1,437 @@
+{
+  "company": {
+    "name": "Acme Corp",
+    "departments": [
+      {
+        "name": "Engineering",
+        "budget": {
+          "amount": 500000,
+          "currency": "USD"
+        },
+        "tags": [
+          "core",
+          "revenue",
+          "critical"
+        ],
+        "teams": [
+          {
+            "name": "Backend",
+            "members": [
+              "Alice",
+              "Bob",
+              "Carol"
+            ],
+            "coordinates": [
+              10,
+              20
+            ],
+            "tags": [
+              "core",
+              "api"
+            ],
+            "scores": [
+              95,
+              87,
+              92,
+              88,
+              91
+            ],
+            "mixed": [
+              42,
+              true,
+              "active",
+              null
+            ]
+          },
+          {
+            "name": "Frontend",
+            "members": [
+              "Dave",
+              "Eve"
+            ],
+            "coordinates": [
+              30,
+              40
+            ],
+            "tags": [
+              "ui",
+              "react"
+            ],
+            "scores": [
+              85,
+              90,
+              88
+            ],
+            "mixed": [
+              100,
+              false,
+              "pending",
+              3.14
+            ]
+          }
+        ],
+        "projects": [
+          {
+            "id": "P1",
+            "title": "API Gateway",
+            "lead": {
+              "id": 1,
+              "name": "Alice"
+            },
+            "points": [
+              10,
+              20,
+              30
+            ],
+            "milestones": [
+              "Q1",
+              "Q2",
+              "Q3",
+              "Q4"
+            ],
+            "tags": [
+              "auth",
+              "security"
+            ]
+          },
+          {
+            "id": "P2",
+            "title": "Auth Service",
+            "lead": {
+              "id": 2,
+              "name": "Bob"
+            },
+            "points": [
+              15,
+              25,
+              35
+            ],
+            "milestones": [
+              "Q1",
+              "Q2",
+              "Q3",
+              null
+            ],
+            "tags": [
+              "oauth",
+              "jwt"
+            ]
+          },
+          {
+            "id": "P3",
+            "title": "UI Redesign",
+            "lead": {
+              "id": 3,
+              "name": "Carol"
+            },
+            "points": [
+              5,
+              10,
+              15
+            ],
+            "milestones": [
+              "Q2",
+              "Q3",
+              null,
+              null
+            ],
+            "tags": [
+              "frontend",
+              "react"
+            ]
+          }
+        ],
+        "priorities": [
+          "auth",
+          "scaling",
+          "security",
+          "monitoring"
+        ],
+        "messages": [
+          "hello|world",
+          "foo",
+          "bar"
+        ]
+      },
+      {
+        "name": "Marketing",
+        "budget": {
+          "amount": 10000,
+          "currency": "EUR"
+        },
+        "tags": [
+          "external",
+          "brand"
+        ],
+        "teams": [
+          {
+            "name": "Growth",
+            "members": [
+              "Dave",
+              "Eve",
+              "Frank"
+            ],
+            "campaigns": [
+              "Social",
+              "Email",
+              "SEO"
+            ],
+            "metrics": [
+              98,
+              95,
+              97,
+              96
+            ],
+            "targets": [
+              100,
+              200,
+              150
+            ]
+          },
+          {
+            "name": "Brand",
+            "members": [
+              "Grace",
+              "Henry"
+            ],
+            "campaigns": [
+              "TV",
+              "Print",
+              "Digital",
+              "Events"
+            ],
+            "metrics": [
+              85,
+              88,
+              87,
+              90
+            ],
+            "targets": [
+              50,
+              75,
+              60
+            ]
+          }
+        ],
+        "campaigns": [
+          {
+            "id": "C1",
+            "name": "Social Media",
+            "budget": 5000,
+            "channels": [
+              "twitter",
+              "linkedin",
+              "facebook",
+              "instagram"
+            ],
+            "results": [
+              10000,
+              12000,
+              15000
+            ],
+            "tags": [
+              "viral",
+              "engagement"
+            ]
+          },
+          {
+            "id": "C2",
+            "name": "Email Marketing",
+            "budget": 3000,
+            "channels": [
+              "sendgrid",
+              "mailchimp",
+              null,
+              null
+            ],
+            "results": [
+              5000,
+              5500,
+              4800
+            ],
+            "tags": [
+              "newsletter",
+              "promo"
+            ]
+          },
+          {
+            "id": "C3",
+            "name": "Content Marketing",
+            "budget": 4000,
+            "channels": [
+              "blog",
+              "youtube",
+              "podcast",
+              null
+            ],
+            "results": [
+              8000,
+              9500,
+              8700
+            ],
+            "tags": [
+              "seo",
+              "thought-leadership"
+            ]
+          }
+        ],
+        "channels": [
+          "twitter",
+          "linkedin",
+          "email"
+        ],
+        "ab_test_variants": [
+          "control",
+          "treatment"
+        ],
+        "performance_matrix": [
+          [98.5, 85.3, 92.1, null],
+          [87.2, null, 91.4, 88.9],
+          [95.0, 93.5, 89.7, 90.2]
+        ]
+      },
+      {
+        "name": "Stealth",
+        "budget": {
+          "amount": 10000,
+          "currency": null
+        },
+        "tags": [
+          "confidential"
+        ],
+        "teams": [
+          {
+            "name": "Skunkworks",
+            "members": [
+              "Frank",
+              "Grace"
+            ],
+            "clearance_levels": [
+              5,
+              4,
+              3
+            ],
+            "projects": [
+              "Project X",
+              "Project Y",
+              "Project Z"
+            ],
+            "readiness": [
+              100,
+              95,
+              98,
+              97
+            ]
+          }
+        ],
+        "prototypes": [
+          {
+            "id": "X1",
+            "name": "Project X",
+            "lead": {
+              "id": 6,
+              "name": "Frank"
+            },
+            "specs": {
+              "performance": [
+                "95%",
+                "98%",
+                "97%"
+              ],
+              "weight": "2.5kg"
+            },
+            "tags": [
+              "core",
+              "secret"
+            ],
+            "milestones": [
+              "Q1",
+              "Q2",
+              "Q3",
+              "Q4"
+            ]
+          },
+          {
+            "id": "X2",
+            "name": "Project Y",
+            "lead": {
+              "id": 7,
+              "name": "Grace"
+            },
+            "specs": {
+              "performance": [
+                "88%",
+                "92%",
+                "90%"
+              ],
+              "weight": "1.8kg"
+            },
+            "tags": [
+              "stealth",
+              "advanced"
+            ],
+            "milestones": [
+              "Q2",
+              "Q3",
+              null,
+              null
+            ]
+          }
+        ],
+        "secret_codes": [
+          "X42",
+          "Y99",
+          "Z01"
+        ],
+        "access_levels": [
+          5,
+          null
+        ],
+        "backup_locations": [
+          "bunker-alpha",
+          "bunker-beta"
+        ],
+        "sensor_grid": [
+          [
+            [1, 2, 3, 4],
+            [5, 6, 7, 8],
+            [9, 10, 11, 12]
+          ],
+          [
+            [13, 14, 15, 16],
+            [17, 18, 19, 20],
+            [21, 22, 23, 24]
+          ]
+        ],
+        "quantum_states": [
+          [
+            {"amplitude": 0.5, "phase": 0.2, "probability": 0.25},
+            {"amplitude": 0.3, "phase": 0.8, "probability": 0.15}
+          ],
+          [
+            {"amplitude": 0.7, "phase": 0.1, "probability": 0.35},
+            {"amplitude": 0.2, "phase": 0.5, "probability": 0.20}
+          ],
+          [
+            {"amplitude": 0.4, "phase": 0.6, "probability": 0.30},
+            {"amplitude": 0.1, "phase": 0.3, "probability": 0.10}
+          ]
+        ]
+      }
+    ],
+    "contact": {
+      "email": "info@mycompany.com",
+      "phone": "+1 (123) 456-7890",
+      "location": {
+        "address": ["123 Infinite loop Ave", "Suite 101"],
+        "state": "CA",
+        "zip": 12345
+      }
+    },
+    "global_tags": [
+      "tech",
+      "startup",
+      "innovation"
+    ]
+  }
+}

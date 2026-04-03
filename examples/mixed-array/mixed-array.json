@@ -1,0 +1,10 @@
+{
+  "items": [
+    1,
+    {
+      "a": "hello",
+      "b": "world"
+    },
+    "text value"
+  ]
+}

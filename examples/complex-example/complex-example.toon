@@ -1,0 +1,185 @@
+company:
+  name: Acme Corp
+  departments[3]:
+    -
+      name: Engineering
+      budget:
+        amount: 500000
+        currency: USD
+      tags[3]: core,revenue,critical
+      teams[2]:
+        -
+          name: Backend
+          members[3]: Alice,Bob,Carol
+          coordinates[2]: 10,20
+          tags[2]: core,api
+          scores[5]: 95,87,92,88,91
+          mixed[4]: 42,true,active,null
+        -
+          name: Frontend
+          members[2]: Dave,Eve
+          coordinates[2]: 30,40
+          tags[2]: ui,react
+          scores[3]: 85,90,88
+          mixed[4]: 100,false,pending,3.14
+      projects[3]:
+        -
+          id: P1
+          title: API Gateway
+          lead:
+            id: 1
+            name: Alice
+          points[3]: 10,20,30
+          milestones[4]: Q1,Q2,Q3,Q4
+          tags[2]: auth,security
+        -
+          id: P2
+          title: Auth Service
+          lead:
+            id: 2
+            name: Bob
+          points[3]: 15,25,35
+          milestones[4]: Q1,Q2,Q3,null
+          tags[2]: oauth,jwt
+        -
+          id: P3
+          title: UI Redesign
+          lead:
+            id: 3
+            name: Carol
+          points[3]: 5,10,15
+          milestones[4]: Q2,Q3,null,null
+          tags[2]: frontend,react
+      priorities[4]: auth,scaling,security,monitoring
+      messages[3]: hello|world,foo,bar
+    -
+      name: Marketing
+      budget:
+        amount: 10000
+        currency: EUR
+      tags[2]: external,brand
+      teams[2]:
+        -
+          name: Growth
+          members[3]: Dave,Eve,Frank
+          campaigns[3]: Social,Email,SEO
+          metrics[4]: 98,95,97,96
+          targets[3]: 100,200,150
+        -
+          name: Brand
+          members[2]: Grace,Henry
+          campaigns[4]: TV,Print,Digital,Events
+          metrics[4]: 85,88,87,90
+          targets[3]: 50,75,60
+      campaigns[3]:
+        -
+          id: C1
+          name: Social Media
+          budget: 5000
+          channels[4]: twitter,linkedin,facebook,instagram
+          results[3]: 10000,12000,15000
+          tags[2]: viral,engagement
+        -
+          id: C2
+          name: Email Marketing
+          budget: 3000
+          channels[4]: sendgrid,mailchimp,null,null
+          results[3]: 5000,5500,4800
+          tags[2]: newsletter,promo
+        -
+          id: C3
+          name: Content Marketing
+          budget: 4000
+          channels[4]: blog,youtube,podcast,null
+          results[3]: 8000,9500,8700
+          tags[2]: seo,thought-leadership
+      channels[3]: twitter,linkedin,email
+      ab_test_variants[2]: control,treatment
+      performance_matrix[3]:
+        - [4]: 98.5,85.3,92.1,null
+        - [4]: 87.2,null,91.4,88.9
+        - [4]: 95,93.5,89.7,90.2
+    -
+      name: Stealth
+      budget:
+        amount: 10000
+        currency: null
+      tags[1]: confidential
+      teams[1]:
+        -
+          name: Skunkworks
+          members[2]: Frank,Grace
+          clearance_levels[3]: 5,4,3
+          projects[3]: Project X,Project Y,Project Z
+          readiness[4]: 100,95,98,97
+      prototypes[2]:
+        -
+          id: X1
+          name: Project X
+          lead:
+            id: 6
+            name: Frank
+          specs:
+            performance[3]: 95%,98%,97%
+            weight: 2.5kg
+          tags[2]: core,secret
+          milestones[4]: Q1,Q2,Q3,Q4
+        -
+          id: X2
+          name: Project Y
+          lead:
+            id: 7
+            name: Grace
+          specs:
+            performance[3]: 88%,92%,90%
+            weight: 1.8kg
+          tags[2]: stealth,advanced
+          milestones[4]: Q2,Q3,null,null
+      secret_codes[3]: X42,Y99,Z01
+      access_levels[2]: 5,null
+      backup_locations[2]: bunker-alpha,bunker-beta
+      sensor_grid[2]:
+        - [3]:
+          - [4]: 1,2,3,4
+          - [4]: 5,6,7,8
+          - [4]: 9,10,11,12
+        - [3]:
+          - [4]: 13,14,15,16
+          - [4]: 17,18,19,20
+          - [4]: 21,22,23,24
+      quantum_states[3]:
+        - [2]:
+          -
+            amplitude: 0.5
+            phase: 0.2
+            probability: 0.25
+          -
+            amplitude: 0.3
+            phase: 0.8
+            probability: 0.15
+        - [2]:
+          -
+            amplitude: 0.7
+            phase: 0.1
+            probability: 0.35
+          -
+            amplitude: 0.2
+            phase: 0.5
+            probability: 0.2
+        - [2]:
+          -
+            amplitude: 0.4
+            phase: 0.6
+            probability: 0.3
+          -
+            amplitude: 0.1
+            phase: 0.3
+            probability: 0.1
+  contact:
+    email: info@mycompany.com
+    phone: +1 (123) 456-7890
+    location:
+      address[2]: 123 Infinite loop Ave,Suite 101
+      state: CA
+      zip: 12345
+  global_tags[3]: tech,startup,innovation

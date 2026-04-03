@@ -1,0 +1,4 @@
+[3]{id,name,role,active}:
+  1,Alice,admin,true
+  2,Bob,user,false
+  3,Carol,user,true
