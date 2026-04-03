@@ -63,7 +63,15 @@ const { NULL_MARKER, FIELD_SEPARATOR } = require("../constants");
  * @returns {string} e.g. `"{1|Alice}"` or `"{~|Bob}"`
  */
 const serializeInlineObject = (obj, fields) => {
-  const declared = fields.filter(f => !f.variadic);
+  let declared = fields.filter(f => !f.variadic);
+  
+  // Backup: if no declared fields but obj has values, 
+  // treat all fields as declared (something went wrong with variadic detection)
+  if (declared.length === 0 && obj && Object.keys(obj).length > 0) {
+    declared = fields; // Use all fields as declared
+    console.warn("No declared fields but object has values, falling back to treating all fields as declared");
+  }
+
   const parts    = declared.map(f => serializeInlineValue(
     obj != null ? obj[f.name] : undefined,
     f

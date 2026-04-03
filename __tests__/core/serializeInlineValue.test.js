@@ -116,10 +116,24 @@ describe("serializeInlineValue", () => {
       expect(serializeInlineValue(data, d)).toBe("[{1|Alice}|{2|Bob}]");
     });
 
-    test("absent field in object emits ~", () => {
+    test("absent field in object omitted when variadic (n-aware)", () => {
+      // n=2, name field appears in both records (f=1.0) → declared
+      // id field appears in both records (f=1.0) → declared
+      // Both fields in schema, no nulls to emit
+      const data = [{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }];
+      const d    = arrDesc(data);
+      expect(serializeInlineValue([{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }], d))
+        .toBe("[{1|Alice}|{2|Bob}]");
+    });
+
+    test("null value in field counts as absent → variadic", () => {
+      // n=2, name: appears in 2/2 records (f=1.0) → declared
+      // null name means field is present but value is null → emits ~
       const data = [{ id: 1, name: "Alice" }, { id: 2, name: null }];
       const d    = arrDesc(data);
-      expect(serializeInlineValue(data, d)).toBe("[{1|Alice}|{2|~}]");
+      // With n=2, name frequency = 2/2 = 1.0 → declared
+      expect(serializeInlineValue([{ id: 1, name: "Alice" }, { id: 2, name: null }], d))
+        .toBe("[{1|Alice}|{2|~}]");
     });
   });
 
@@ -132,13 +146,17 @@ describe("serializeInlineValue", () => {
       expect(serializeInlineValue({ id: 1, name: "Alice" }, d)).toBe("{1|Alice}");
     });
 
-    test("absent field in nested object → ~", () => {
+    test("absent field in nested object emits ~ when declared", () => {
+      // n=2, name appears in 1/2 records (f=0.50), len=4
+      // breakEven = (2+4-2)/(2×5) = 4/10 = 0.40
+      // 0.50 < 0.40? NO → declared
+      // Therefore missing name should emit ~
       const data = [
         { id: "P1", lead: { id: 1, name: "Alice" } },
-        { id: "P2", lead: { id: 2, name: null    } }
+        { id: "P2", lead: { id: 2 } }
       ];
       const d = fieldDesc(data, "lead");
-      expect(serializeInlineValue({ id: 2, name: null }, d)).toBe("{2|~}");
+      expect(serializeInlineValue({ id: 2 }, d)).toBe("{2|~}");
     });
 
     test("nested object with array sub-field: specs{performance[3]|weight}", () => {

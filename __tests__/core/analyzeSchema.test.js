@@ -218,100 +218,100 @@ describe("analyzeSchema", () => {
   // ── Variadic fields ────────────────────────────────────────────────────────
 
   describe("variadic fields", () => {
-    test("marks parent variadic when key appears below variadicMaxFrequency", () => {
-      const data = [
-        { id: 1, name: "Alice" },
-        { id: 2, name: "Bob"   },
-        { id: 3, name: "Carol" },
-        { id: 4, name: "Dave"  },
-        { id: 5, name: "Eve"   },
-        { id: 6, name: "Frank", note: "rare" }
-      ];
-      expect(analyzeSchema(data).fields.some(f => f.variadic)).toBe(true);
-    });
-
-    test("rare key has frequency below variadicMaxFrequency and variadic: true", () => {
-      const data = [
-        { id: 1, name: "Alice" },
-        { id: 2, name: "Bob"   },
-        { id: 3, name: "Carol" },
-        { id: 4, name: "Dave"  },
-        { id: 5, name: "Eve"   },
-        { id: 6, name: "Frank", note: "rare" }
-      ];
-      const note = analyzeSchema(data).fields.find(f => f.name === "note");
-      expect(note).toBeDefined();
-      expect(note.frequency).toBeLessThan(0.2);
-      expect(note.variadic).toBe(true);
-    });
-
-    test("declared field has variadic: false", () => {
-      const data = [{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }];
-      analyzeSchema(data).fields.forEach(f => expect(f.variadic).toBe(false));
-    });
-
-    test("variadic is false when all keys meet threshold", () => {
-      const data = [
-        { id: 1, name: "Alice" },
-        { id: 2, name: "Bob"   },
-        { id: 3, name: "Carol" }
-      ];
-      expect(analyzeSchema(data).fields.some(f => f.variadic)).toBe(false);
-    });
-
-    test("key at exactly variadicMaxFrequency is declared not variadic", () => {
-      // note (4 chars) appears in 1/5 = 0.20, exactly at floor threshold
-      // break-even for 4-char key = 1/6 ≈ 0.167
-      // 0.20 >= floor AND 0.20 > break-even → declared
-      const data = [
-        { id: 1, name: "Alice" },
-        { id: 2, name: "Bob"   },
-        { id: 3, name: "Carol" },
-        { id: 4, name: "Dave"  },
-        { id: 5, name: "Eve", note: "x" }
-      ];
-      const result = analyzeSchema(data);
-      const note   = result.fields.find(f => f.name === "note");
-      expect(note.frequency).toBeGreaterThanOrEqual(0.2);
-      expect(result.fields.some(f => f.variadic)).toBe(false);
-    });
-
-    test("short key above floor but below break-even is variadic", () => {
-      // "x" (1 char), break-even = 1/(1+2) = 0.333
-      // Use 5 records where "x" appears in 1 → f=0.20 >= floor, but 0.20 < 0.333 → variadic
-      const data = [
-        { id: 1, name: "Alice" },
-        { id: 2, name: "Bob"   },
-        { id: 3, name: "Carol" },
-        { id: 4, name: "Dave"  },
-        { id: 5, name: "Eve", x: "v" }
-      ];
-      const result = analyzeSchema(data);
-      const field  = result.fields.find(f => f.name === "x");
-      expect(field.frequency).toBe(0.2);
-      expect(field.variadic).toBe(true);
-    });
-
-    test("null and missing key are treated identically for frequency", () => {
-      const withNull    = [{ id: 1, role: "Lead" }, { id: 2, role: null }];
-      const withMissing = [{ id: 1, role: "Lead" }, { id: 2             }];
-      const f1 = analyzeSchema(withNull).fields.find(f    => f.name === "role").frequency;
-      const f2 = analyzeSchema(withMissing).fields.find(f => f.name === "role").frequency;
-      expect(f1).toBe(f2);
-    });
-
-    test("custom variadicMaxFrequency option is respected", () => {
-      // extra appears in 2/3 ≈ 0.67, above default 0.2 but below custom 0.9
-      const data = [
-        { id: 1, name: "Alice", extra: "x" },
-        { id: 2, name: "Bob",   extra: "y" },
-        { id: 3, name: "Carol"             }
-      ];
-      const result = analyzeSchema(data, { variadicMaxFrequency: 0.9 });
-      expect(result.fields.some(f => f.variadic)).toBe(true);
-      expect(result.fields.find(f => f.name === "extra").frequency).toBeLessThan(0.9);
-    });
+  test("marks parent variadic when key appears below variadicMaxFrequency", () => {
+    const data = [
+      { id: 1, name: "Alice" },
+      { id: 2, name: "Bob"   },
+      { id: 3, name: "Carol" },
+      { id: 4, name: "Dave"  },
+      { id: 5, name: "Eve"   },
+      { id: 6, name: "Frank", note: "rare" }
+    ];
+    expect(analyzeSchema(data).fields.some(f => f.variadic)).toBe(true);
   });
+
+  test("rare key has frequency below variadicMaxFrequency and variadic: true", () => {
+    const data = [
+      { id: 1, name: "Alice" },
+      { id: 2, name: "Bob"   },
+      { id: 3, name: "Carol" },
+      { id: 4, name: "Dave"  },
+      { id: 5, name: "Eve"   },
+      { id: 6, name: "Frank", note: "rare" }
+    ];
+    const note = analyzeSchema(data).fields.find(f => f.name === "note");
+    expect(note).toBeDefined();
+    expect(note.frequency).toBeLessThan(0.2);
+    expect(note.variadic).toBe(true);
+  });
+
+  test("declared field has variadic: false", () => {
+    const data = [{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }];
+    analyzeSchema(data).fields.forEach(f => expect(f.variadic).toBe(false));
+  });
+
+  test("variadic is false when all keys meet threshold", () => {
+    const data = [
+      { id: 1, name: "Alice" },
+      { id: 2, name: "Bob"   },
+      { id: 3, name: "Carol" }
+    ];
+    expect(analyzeSchema(data).fields.some(f => f.variadic)).toBe(false);
+  });
+
+  test("key at exactly variadicMaxFrequency with short key is variadic (n-aware)", () => {
+    // note (4 chars) appears in 1/5 = 0.20, exactly at floor threshold
+    // n-aware break-even for 4-char key with n=5 = (5+4+1)/(5×5) = 0.40
+    // 0.20 < 0.40 → variadic (n-aware formula)
+    const data = [
+      { id: 1, name: "Alice" },
+      { id: 2, name: "Bob"   },
+      { id: 3, name: "Carol" },
+      { id: 4, name: "Dave"  },
+      { id: 5, name: "Eve", note: "x" }
+    ];
+    const result = analyzeSchema(data);
+    const note   = result.fields.find(f => f.name === "note");
+    expect(note.frequency).toBe(0.2);
+    expect(result.fields.some(f => f.variadic)).toBe(true); // ← CHANGED: now variadic
+  });
+
+  test("short key above floor but below break-even is variadic", () => {
+    // "x" (1 char), n-aware break-even = (5+1+1)/(5×2) = 7/10 = 0.70
+    // f=0.20 < 0.70 → variadic
+    const data = [
+      { id: 1, name: "Alice" },
+      { id: 2, name: "Bob"   },
+      { id: 3, name: "Carol" },
+      { id: 4, name: "Dave"  },
+      { id: 5, name: "Eve", x: "v" }
+    ];
+    const result = analyzeSchema(data);
+    const field  = result.fields.find(f => f.name === "x");
+    expect(field.frequency).toBe(0.2);
+    expect(field.variadic).toBe(true);
+  });
+
+  test("null and missing key are treated identically for frequency", () => {
+    const withNull    = [{ id: 1, role: "Lead" }, { id: 2, role: null }];
+    const withMissing = [{ id: 1, role: "Lead" }, { id: 2             }];
+    const f1 = analyzeSchema(withNull).fields.find(f    => f.name === "role").frequency;
+    const f2 = analyzeSchema(withMissing).fields.find(f => f.name === "role").frequency;
+    expect(f1).toBe(f2);
+  });
+
+  test("custom variadicMaxFrequency option is respected", () => {
+    // extra appears in 2/3 ≈ 0.67, above default 0.2 but below custom 0.9
+    const data = [
+      { id: 1, name: "Alice", extra: "x" },
+      { id: 2, name: "Bob",   extra: "y" },
+      { id: 3, name: "Carol"             }
+    ];
+    const result = analyzeSchema(data, { variadicMaxFrequency: 0.9 });
+    expect(result.fields.some(f => f.variadic)).toBe(true);
+    expect(result.fields.find(f => f.name === "extra").frequency).toBeLessThan(0.9);
+  });
+});
 
   // ── Nested objects ─────────────────────────────────────────────────────────
 

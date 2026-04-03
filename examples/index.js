@@ -67,7 +67,7 @@ async function run(input) {
     console.log(JSON.stringify(jsonData, null, 2));
 
     console.log(`\n=== MOON Output ===`);
-    console.log(serialize(jsonData, { addHints: true, compression: "low" }));
+    console.log(serialize(jsonData, { addHints: true, compression: "high" }));
 
     // 4. Check for companion .toon file (same name, .toon extension)
     const toonFile = jsonFile.replace(/\.json$/i, ".toon");

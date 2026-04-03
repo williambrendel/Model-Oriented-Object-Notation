@@ -77,7 +77,10 @@ describe("serializeArray", () => {
         .toBe("users[2]{id|name}:\n- 1|Alice\n- 2|Bob");
     });
 
-    test("absent field → ~", () => {
+    test("absent field (null) → declared (in schema with ~)", () => {
+      // role field: n=2, len=4, frequency=0.50
+      // breakEven = (2+4-2)/(2×5) = 4/10 = 0.40
+      // 0.50 < 0.40? NO → declared
       const data = [{ id: 1, name: "Alice", role: "admin" }, { id: 2, name: "Bob", role: null }];
       const d    = desc(data);
       expect(serializeArray("users", data, d, 0))
@@ -361,9 +364,10 @@ describe("serializeArray", () => {
     });
 
     test("custom hintPrefix", () => {
-      const data = [{ id: 1, name: "Alice" }];
+      const data = [{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }];
       const d    = desc(data);
       const result = serializeArray("users", data, d, 0, null, { addHints: true, hintPrefix: "//" });
+      // With n=2, both fields have frequency 1.0 → declared, hint shows "id|name"
       expect(result.split("\n")[1]).toContain("// id|name");
     });
 
@@ -388,7 +392,7 @@ describe("serializeArray", () => {
       expect(result).not.toContain("#");
     });
 
-    test("variadic fields included in hint", () => {
+    test("variadic fields included in hint as ...", () => {
       const data = [
         { id: 1, name: "Alice" },
         { id: 2, name: "Bob"   },

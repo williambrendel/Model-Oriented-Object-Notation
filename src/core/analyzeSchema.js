@@ -147,7 +147,7 @@ const analyzeFields = (records, total, opts) => {
     const f           = freq[key] / total;
     const fieldValues = values[key] || [];
 
-    if (isVariadic(key, f, variadicMaxFrequency)) variadic = true;
+    if (isVariadic(key, f, total, variadicMaxFrequency)) variadic = true;
 
     const allObjects = fieldValues.length > 0 &&
       fieldValues.every(v => v && typeof v === "object" && !Array.isArray(v));
@@ -170,7 +170,7 @@ const analyzeFields = (records, total, opts) => {
       descriptor = new PrimitiveDescriptor();
     }
 
-    const fieldVariadic = isVariadic(key, f, variadicMaxFrequency);
+    const fieldVariadic = isVariadic(key, f, total, variadicMaxFrequency);
     fields.push(
       descriptor instanceof ArrayDescriptor
         ? new ArrayDescriptor({ dimensions: descriptor.dimensions, elementType: descriptor.elementType, fields: descriptor.fields, isOneLiner: descriptor.isOneLiner, name: key, frequency: f, variadic: fieldVariadic })
