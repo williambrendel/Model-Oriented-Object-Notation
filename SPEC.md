@@ -1,3 +1,5 @@
+![MOON logo](assets/short-logo.svg)
+
 # MOON Specification
 
 ## Model-Oriented Object Notation
